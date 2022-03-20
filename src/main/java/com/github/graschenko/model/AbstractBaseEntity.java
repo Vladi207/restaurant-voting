@@ -4,6 +4,9 @@ import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
 import org.springframework.util.Assert;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class AbstractBaseEntity implements Persistable<Integer> {
     protected Integer id;
 
