@@ -1,21 +1,18 @@
 package com.github.graschenko.model;
 
+import lombok.*;
+
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
     protected String name;
 
-    public AbstractNamedEntity() {
-    }
-
     public AbstractNamedEntity(Integer id, String name) {
         super(id);
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
