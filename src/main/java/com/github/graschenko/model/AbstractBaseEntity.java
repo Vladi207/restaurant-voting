@@ -16,7 +16,7 @@ import javax.persistence.*;
 public abstract class AbstractBaseEntity implements Persistable<Integer> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
     @Override
