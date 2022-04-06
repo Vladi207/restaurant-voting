@@ -24,7 +24,7 @@ public class Dish extends AbstractNamedEntity {
 
     @Column(name = "date", nullable = false, columnDefinition = "date default now()")
     @NotNull
-    private LocalDate localDate;
+    private LocalDate date;
 
     public Dish(Integer id, String name, Integer price) {
         super(id, name);
@@ -34,6 +34,6 @@ public class Dish extends AbstractNamedEntity {
     public Dish(Integer id, String name, Integer price, LocalDate localDate) {
         super(id, name);
         this.price = price;
-        this.localDate = localDate;
+        this.date = localDate;
     }
 }
