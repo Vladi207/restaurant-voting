@@ -33,10 +33,10 @@ public class Vote extends AbstractBaseEntity {
 
     @Column(name = "date", nullable = false, columnDefinition = "date default now()")
     @NotNull
-    private LocalDate localDate;
+    private LocalDate date;
 
-    public Vote(Integer id, LocalDate localDate) {
+    public Vote(Integer id, LocalDate date) {
         super(id);
-        this.localDate = localDate;
+        this.date = date;
     }
 }
