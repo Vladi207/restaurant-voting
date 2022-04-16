@@ -1,6 +1,7 @@
 package com.github.graschenko.config;
 
 import com.github.graschenko.AuthUser;
+import com.github.graschenko.model.Role;
 import com.github.graschenko.model.User;
 import com.github.graschenko.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,12 +43,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
     }
 
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/api/account").hasRole(Role.USER.name())
+                .antMatchers("/api/**").hasRole(Role.ADMIN.name())
+                .and().formLogin();
+    }
 
-    //    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder())
-//                .withUser("user@gmail.com").password("{noop}password").roles("USER").and()
-//                .withUser("admin@javaops.ru").password("{noop}admin").roles("USER", "ADMIN");
-//    }
 }
