@@ -1,6 +1,7 @@
 package com.github.graschenko.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.graschenko.HasIdAndEmail;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(callSuper = true, exclude = {"password"})
-public class User extends AbstractNamedEntity implements Serializable {
+public class User extends AbstractNamedEntity implements Serializable, HasIdAndEmail {
 
     @Column(name = "email", nullable = false, unique = true)
     @Email

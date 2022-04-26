@@ -1,5 +1,6 @@
 package com.github.graschenko.model;
 
+import com.github.graschenko.HasId;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Access(AccessType.FIELD)
-public abstract class AbstractBaseEntity implements Persistable<Integer> {
+public abstract class AbstractBaseEntity implements Persistable<Integer>, HasId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
