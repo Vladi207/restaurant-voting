@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         return email -> {
             log.debug("Authentication {}", email);
-            Optional<User> optionalUser = userRepository.findByEmailIgnoreCase(email);
+            Optional<User> optionalUser = userRepository.getByEmail(email);
             return new AuthUser(optionalUser.orElseThrow(
                     () -> new UsernameNotFoundException("User '" + email + "' was not found")));
         };
