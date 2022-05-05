@@ -5,6 +5,7 @@ import com.github.graschenko.repository.UserRepository;
 import com.github.graschenko.to.UserTo;
 import com.github.graschenko.util.UserUtil;
 import com.github.graschenko.util.ValidationUtil;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -19,12 +20,10 @@ import java.util.List;
 
 @Service("userService")
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-
-    private final PasswordEncoder passwordEncoder;
 
     public ResponseEntity<User> get(int id) {
         return ResponseEntity.of(userRepository.findById(id));
@@ -35,7 +34,7 @@ public class UserService {
     }
 
     public User prepareAndSave(User user) {
-        return userRepository.save(UserUtil.prepareToSave(user, passwordEncoder));
+        return userRepository.save(UserUtil.prepareToSave(user));
     }
 
     public List<User> getAll() {

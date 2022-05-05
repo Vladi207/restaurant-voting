@@ -3,7 +3,9 @@ package com.github.graschenko.util;
 import com.github.graschenko.HasId;
 import com.github.graschenko.util.exception.IllegalRequestDataException;
 import com.github.graschenko.util.exception.NotFoundException;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class ValidationUtil {
 
     public static void checkNew(HasId bean) {
