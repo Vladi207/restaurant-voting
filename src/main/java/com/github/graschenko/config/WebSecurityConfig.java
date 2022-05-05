@@ -32,24 +32,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserRepository userRepository;
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return email -> {
-            log.debug("Authentication {}", email);
-            Optional<User> optionalUser = userRepository.getByEmail(email);
-            return new AuthUser(optionalUser.orElseThrow(
-                    () -> new UsernameNotFoundException("User '" + email + "' was not found")));
-        };
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        return super.userDetailsServiceBean();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService())
+        auth.userDetailsService(email -> {
+                    log.debug("Authentication {}", email);
+                    Optional<User> optionalUser = userRepository.getByEmail(email);
+                    return new AuthUser(optionalUser.orElseThrow(
+                            () -> new UsernameNotFoundException("User '" + email + "' was not found")));
+                })
                 .passwordEncoder(PASSWORD_ENCODER);
     }
 
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/account").hasRole(Role.USER.name())
+                .antMatchers("/api/profile").hasRole(Role.USER.name())
                 .antMatchers("/api/**").hasRole(Role.ADMIN.name())
                 .and().formLogin()
                 .and().httpBasic()
