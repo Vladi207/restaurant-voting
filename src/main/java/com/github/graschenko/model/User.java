@@ -31,6 +31,7 @@ public class User extends AbstractNamedEntity implements Serializable, HasIdAndE
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 128)
+    // https://stackoverflow.com/a/12505165/548473
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 

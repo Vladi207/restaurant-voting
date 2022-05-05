@@ -23,6 +23,14 @@ spring:
 #      password: password
 #      roles: USER
 
+  # Jackson Serialization Issue Resolver
+  jackson:
+    visibility:
+      field: any
+      getter: none
+      setter: none
+      is-getter: none
+
 logging:
   level:
     root: WARN
