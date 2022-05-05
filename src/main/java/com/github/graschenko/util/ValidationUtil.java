@@ -31,4 +31,12 @@ public class ValidationUtil {
         checkNotFoundWithId(object != null, id);
         return object;
     }
+
+    public static void assureIdConsistent(HasId bean, int id) {
+        if (bean.isNew()) {
+            bean.setId(id);
+        } else if (bean.id() != id) {
+            throw new IllegalRequestDataException(bean.getClass().getSimpleName() + " must be with id=" + id);
+        }
+    }
 }

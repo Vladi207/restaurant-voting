@@ -63,4 +63,9 @@ public class UserService {
         User user = userRepository.getById(userTo.id());
         prepareAndSave(UserUtil.updateFromTo(user, userTo));
     }
+
+    public User create(User user) {
+        Assert.notNull(user,"user must not be null");
+        return prepareAndSave(user);
+    }
 }
