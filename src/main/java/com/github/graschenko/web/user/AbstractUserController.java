@@ -6,6 +6,7 @@ import com.github.graschenko.to.UserTo;
 import com.github.graschenko.util.UserUtil;
 import com.github.graschenko.util.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -15,8 +16,10 @@ import java.util.List;
 @Slf4j
 public abstract class AbstractUserController {
 
+    @Autowired
     private UserService service;
 
+    @Autowired
     private UniqueMailValidator mailValidator;
 
     @InitBinder

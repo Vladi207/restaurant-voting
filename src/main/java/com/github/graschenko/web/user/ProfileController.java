@@ -27,12 +27,12 @@ public class ProfileController extends AbstractUserController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(UserTo userTo, AuthUser authUser) {
+    public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthUser authUser) {
         super.update(userTo, authUser.getId());
     }
 
-    @GetMapping
-    public User get(AuthUser authUser) {
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public User get(@AuthenticationPrincipal AuthUser authUser) {
         return authUser.getUser();
     }
 

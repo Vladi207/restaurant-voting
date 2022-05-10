@@ -12,8 +12,8 @@ import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class UserTo extends NamedTo implements HasIdAndEmail, Serializable {
 
@@ -33,5 +33,10 @@ public class UserTo extends NamedTo implements HasIdAndEmail, Serializable {
         super(id, name);
         this.email = email;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserTo:" + id + '[' + email + ']';
     }
 }
