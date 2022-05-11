@@ -55,9 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/admin/users").hasRole(Role.ADMIN.name())
+                .antMatchers("/api/admin/**").hasRole(Role.ADMIN.name())
                 .antMatchers(HttpMethod.POST, "/api/profile").anonymous()
                 .antMatchers("/api/**").authenticated()
                 .and().httpBasic()

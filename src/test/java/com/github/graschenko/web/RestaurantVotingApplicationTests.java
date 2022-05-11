@@ -1,4 +1,4 @@
-package com.github.graschenko;
+package com.github.graschenko.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
