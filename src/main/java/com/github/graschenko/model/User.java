@@ -2,6 +2,7 @@ package com.github.graschenko.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.graschenko.HasIdAndEmail;
+import com.github.graschenko.util.validation.NoHtml;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -26,6 +27,7 @@ public class User extends AbstractNamedEntity implements Serializable, HasIdAndE
     @Email
     @NotEmpty
     @Size(max = 128)
+    @NoHtml     // https://stackoverflow.com/questions/17480809
     private String email;
 
     @Column(name = "password", nullable = false)

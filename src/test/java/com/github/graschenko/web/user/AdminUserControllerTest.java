@@ -126,6 +126,18 @@ class AdminUserControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @WithUserDetails(value = UserTestData.ADMIN_MAIL)
+    void updateHtmlUnsafe() throws Exception {
+        User updated = getUpdated();
+        updated.setName("<script>alert(123)</script>");
+        perform(MockMvcRequestBuilders.put(REST_URL + USER_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonWithPassword(updated, "password")))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
     @WithUserDetails(value = ADMIN_MAIL)
     void getByEmail() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + "by-email?email=" + admin.getEmail()))
