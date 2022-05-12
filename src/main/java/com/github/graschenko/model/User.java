@@ -51,6 +51,10 @@ public class User extends AbstractNamedEntity implements Serializable, HasIdAndE
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
+    public User(User u) {
+        this(u.id, u.name, u.email, u.password, u.enabled, u.registered, u.roles);
+    }
+
     public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Set<Role> roles) {
         super(id, name);
         this.email = email;
