@@ -23,7 +23,7 @@ public class AppConfig {
 
     //    https://stackoverflow.com/a/46947975/548473
     @Bean
-    protected Module module() {
+    Module module() {
         return new Hibernate5Module();
     }
 }

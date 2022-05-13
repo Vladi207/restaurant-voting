@@ -6,22 +6,23 @@ import com.github.graschenko.util.validation.NoHtml;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(callSuper = true, exclude = {"password"})
 public class User extends AbstractNamedEntity implements Serializable, HasIdAndEmail {
+
+    @Serial
+    private static final Long serialVersionUID = 1L;
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -68,5 +69,14 @@ public class User extends AbstractNamedEntity implements Serializable, HasIdAndE
 
     public User(Integer id, String name, String email, String password, Role role, Role... roles) {
         this(id, name, email, password,true, new Date(), EnumSet.of(role, roles));
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+
+    @Override
+    public String toString() {
+        return "User:" + id + '[' + email + ']';
     }
 }

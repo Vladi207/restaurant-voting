@@ -1,12 +1,13 @@
 package com.github.graschenko.web.user;
 
-import com.github.graschenko.AuthUser;
+import com.github.graschenko.web.AuthUser;
 import com.github.graschenko.model.User;
 import com.github.graschenko.to.UserTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,13 +23,14 @@ public class ProfileController extends AbstractUserController {
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@AuthenticationPrincipal AuthUser authUser) {
-        super.delete(authUser.getId());
+        super.delete(authUser.id());
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthUser authUser) {
-        super.update(userTo, authUser.getId());
+    @Transactional
+    public void update(@RequestBody @Valid UserTo userTo, @AuthenticationPrincipal AuthUser authUser) {
+        super.update(userTo, authUser.id());
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

@@ -4,10 +4,8 @@ import com.github.graschenko.model.User;
 import com.github.graschenko.repository.UserRepository;
 import com.github.graschenko.to.UserTo;
 import com.github.graschenko.util.UserUtil;
-import com.github.graschenko.util.ValidationUtil;
-import lombok.AllArgsConstructor;
+import com.github.graschenko.util.validation.ValidationUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.data.domain.Sort;
@@ -30,7 +28,7 @@ public class UserService {
     }
 
     public void delete(int id) {
-        ValidationUtil.checkNotFoundWithId(userRepository.delete(id) != 0, id);
+        ValidationUtil.checkModification(userRepository.delete(id), id);
     }
 
     public User prepareAndSave(User user) {
@@ -43,7 +41,7 @@ public class UserService {
 
     public ResponseEntity<User> getByEmail(String email) {
         Assert.notNull(email, "email must not be null");
-        return ValidationUtil.checkNotFound(ResponseEntity.of(userRepository.getByEmail(email)), "email=" + email);
+        return ValidationUtil.checkNotFound(ResponseEntity.of(userRepository.findByEmailIgnoreCase(email)), "email=" + email);
     }
 
     @Transactional

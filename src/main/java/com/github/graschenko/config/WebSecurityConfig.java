@@ -1,7 +1,7 @@
 package com.github.graschenko.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.graschenko.AuthUser;
+import com.github.graschenko.web.AuthUser;
 import com.github.graschenko.model.Role;
 import com.github.graschenko.model.User;
 import com.github.graschenko.repository.UserRepository;
@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(email -> {
                     log.debug("Authentication {}", email);
-                    Optional<User> optionalUser = userRepository.getByEmail(email);
+                    Optional<User> optionalUser = userRepository.findByEmailIgnoreCase(email);
                     return new AuthUser(optionalUser.orElseThrow(
                             () -> new UsernameNotFoundException("User '" + email + "' was not found")));
                 })
@@ -64,5 +64,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
     }
-
 }

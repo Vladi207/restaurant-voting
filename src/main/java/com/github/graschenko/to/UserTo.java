@@ -1,10 +1,8 @@
 package com.github.graschenko.to;
 
 import com.github.graschenko.HasIdAndEmail;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.github.graschenko.util.validation.NoHtml;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,9 +10,8 @@ import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
 
-@Data
+@Value
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public class UserTo extends NamedTo implements HasIdAndEmail, Serializable {
 
     @Serial
@@ -23,11 +20,12 @@ public class UserTo extends NamedTo implements HasIdAndEmail, Serializable {
     @NotBlank
     @Email
     @Size(max = 128)
-    private String email;
+    @NoHtml
+    String email;
 
     @NotBlank
     @Size(min = 5, max = 128)
-    private String password;
+    String password;
 
     public UserTo(Integer id, String name, String email, String password) {
         super(id, name);

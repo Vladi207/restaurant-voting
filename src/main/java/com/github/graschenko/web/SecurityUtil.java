@@ -1,6 +1,5 @@
 package com.github.graschenko.web;
 
-import com.github.graschenko.AuthUser;
 import com.github.graschenko.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

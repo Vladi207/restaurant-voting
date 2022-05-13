@@ -1,9 +1,11 @@
 package com.github.graschenko.model;
 
 import com.github.graschenko.HasId;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.util.ProxyUtils;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -18,6 +20,7 @@ public abstract class AbstractBaseEntity implements Persistable<Integer>, HasId 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY) // https://stackoverflow.com/a/28025008/548473
     protected Integer id;
 
     @Override
@@ -40,7 +43,7 @@ public abstract class AbstractBaseEntity implements Persistable<Integer>, HasId 
         if (this == obj) {
             return true;
         }
-        if (obj == null || !getClass().equals(Hibernate.getClass(obj))) {
+        if (obj == null || !getClass().equals(ProxyUtils.getUserClass(obj))) {
             return false;
         }
         AbstractBaseEntity that = (AbstractBaseEntity) obj;

@@ -29,9 +29,9 @@ public class UniqueMailValidator implements Validator {
     public void validate(Object target, Errors errors) {
         HasIdAndEmail user = ((HasIdAndEmail) target);
         if (StringUtils.hasText(user.getEmail())) {
-            userRepository.getByEmail(user.getEmail().toLowerCase())
+            userRepository.findByEmailIgnoreCase(user.getEmail().toLowerCase())
                     .ifPresent(dbUser -> {
-                        if (request.getMethod().equals("PUT") || (request.getMethod().equals("POST") && user.getId() != null)) {  // UPDATE
+                        if (request.getMethod().equals("PUT")) {  // UPDATE
                             int dbId = dbUser.id();
 
                             // it is ok, if update ourself

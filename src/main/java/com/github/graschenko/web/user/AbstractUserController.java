@@ -4,7 +4,7 @@ import com.github.graschenko.model.User;
 import com.github.graschenko.service.UserService;
 import com.github.graschenko.to.UserTo;
 import com.github.graschenko.util.UserUtil;
-import com.github.graschenko.util.ValidationUtil;
+import com.github.graschenko.util.validation.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
