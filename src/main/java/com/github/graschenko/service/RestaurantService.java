@@ -4,7 +4,7 @@ import com.github.graschenko.model.Restaurant;
 import com.github.graschenko.repository.DishRepository;
 import com.github.graschenko.repository.RestaurantRepository;
 import com.github.graschenko.to.RestaurantTo;
-import com.github.graschenko.util.ToMapper;
+import com.github.graschenko.util.RestaurantUtil;
 import com.github.graschenko.util.exception.IllegalRequestDataException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
@@ -27,8 +27,6 @@ public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
 
     private final DishRepository dishRepository;
-
-    private final ToMapper toMapper;
 
     public Restaurant get(int id) {
         return findById(restaurantRepository, id);
@@ -63,11 +61,11 @@ public class RestaurantService {
     }
 
     public List<RestaurantTo> getAllWithDishes() {
-        return toMapper.getRestaurantTos(restaurantRepository.getAllByDateWithDishes(LocalDate.now()));
+        return RestaurantUtil.getTos(restaurantRepository.getAllByDateWithDishes(LocalDate.now()));
     }
 
     public RestaurantTo getByIdWithDishes(int id) {
-        return restaurantRepository.getByIdAndDateWithDishes(id, LocalDate.now()).map(toMapper::createRestaurantTo).orElseThrow(
+        return restaurantRepository.getByIdAndDateWithDishes(id, LocalDate.now()).map(RestaurantUtil::createTo).orElseThrow(
                 () -> new IllegalRequestDataException("Restaurant with id=\" + id + \" not found")
         );
     }

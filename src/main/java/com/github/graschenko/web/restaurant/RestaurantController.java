@@ -4,6 +4,7 @@ import com.github.graschenko.service.RestaurantService;
 import com.github.graschenko.to.RestaurantTo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import java.util.List;
 @RequestMapping(value = RestaurantController.Rest_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestaurantController {
 
-    static final String Rest_URL = "api/restaurant";
+    static final String Rest_URL = "/api/restaurant";
 
     private final RestaurantService restaurantService;
 
@@ -29,6 +30,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/with-menu")
+    @Cacheable("restaurants")
     public List<RestaurantTo> getAllWithDishes() {
         log.info("get all restaurant with menu");
         return restaurantService.getAllWithDishes();

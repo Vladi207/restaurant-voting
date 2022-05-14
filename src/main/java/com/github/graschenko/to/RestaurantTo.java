@@ -6,7 +6,7 @@ import lombok.Value;
 
 import java.util.List;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Value
 @ToString(callSuper = true)
 public class RestaurantTo extends NamedTo {

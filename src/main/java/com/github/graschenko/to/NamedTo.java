@@ -3,7 +3,6 @@ package com.github.graschenko.to;
 import com.github.graschenko.util.validation.NoHtml;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

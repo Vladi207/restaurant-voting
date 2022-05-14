@@ -2,7 +2,6 @@ package com.github.graschenko.web.restaurant;
 
 import com.github.graschenko.model.Restaurant;
 import com.github.graschenko.service.RestaurantService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,6 +24,7 @@ public class AdminRestaurantController {
 
     private final RestaurantService restaurantService;
 
+    @GetMapping()
     public List<Restaurant> getAll() {
         log.info("get all restaurants");
         return restaurantService.getAll();
@@ -37,7 +37,7 @@ public class AdminRestaurantController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> createWithLocation(@Valid Restaurant restaurant) {
+    public ResponseEntity<Restaurant> createWithLocation(@Valid @RequestBody Restaurant restaurant) {
         log.info("create restaurant {}", restaurant);
         Restaurant created = restaurantService.create(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
