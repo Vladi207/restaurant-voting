@@ -17,4 +17,8 @@ public class DishUtil {
     public static List<DishTo> getTos(Collection<Dish> dishes) {
         return dishes.stream().map(DishUtil::createTo).toList();
     }
+
+    public static Dish createNewFromTo(DishTo dishTo) {
+        return new Dish(dishTo.getId(), dishTo.getName(), dishTo.getPrice());
+    }
 }

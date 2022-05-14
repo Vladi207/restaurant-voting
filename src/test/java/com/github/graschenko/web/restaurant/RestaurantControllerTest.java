@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithUserDetails(value = USER_MAIL)
 public class RestaurantControllerTest extends AbstractControllerTest {
 
-    private static final String REST_URL = RestaurantController.Rest_URL + '/';
+    static final String REST_URL = RestaurantController.Rest_URL + '/';
 
     @Test
     void getByIdWithDishes() throws Exception {

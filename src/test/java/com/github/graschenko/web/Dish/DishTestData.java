@@ -1,11 +1,17 @@
 package com.github.graschenko.web.Dish;
 
 import com.github.graschenko.model.Dish;
+import com.github.graschenko.to.DishTo;
+import com.github.graschenko.web.MatcherFactory;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class DishTestData {
+
+    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Dish.class, "restaurant");
+
+    public static final MatcherFactory.Matcher<DishTo> DISH_TO_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(DishTo.class);
 
     public static final int DISH1_ID = 1;
     public static final int DISH13_ID = 13;
