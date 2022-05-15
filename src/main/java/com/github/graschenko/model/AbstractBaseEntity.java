@@ -1,5 +1,6 @@
 package com.github.graschenko.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.graschenko.HasId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -23,6 +24,7 @@ public abstract class AbstractBaseEntity implements Persistable<Integer>, HasId 
     @Schema(accessMode = Schema.AccessMode.READ_ONLY) // https://stackoverflow.com/a/28025008/548473
     protected Integer id;
 
+    @JsonIgnore
     @Override
     public boolean isNew() {
         return this.id == null;
