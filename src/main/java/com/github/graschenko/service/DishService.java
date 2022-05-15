@@ -38,7 +38,7 @@ public class DishService {
         return dishRepository.getAll(restaurantId);
     }
 
-    public List<DishTo> getAllByRestaurantAndDate(int restaurantId,@Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public List<DishTo> getAllByRestaurantAndDate(int restaurantId, @Nullable LocalDate date) {
         return DishUtil.getTos(dishRepository.getAllByDate(restaurantId, date == null ? LocalDate.now() : date));
     }
 
@@ -71,6 +71,6 @@ public class DishService {
         if (!dish.getDate().equals(LocalDate.now())) {
             throw new IllegalRequestDataException("Can't delete dishes from past days");
         }
-        checkModification(dishRepository.delete(id, restaurantId), id);
+        checkModification(dishRepository.delete(id), id);
     }
 }

@@ -5,9 +5,11 @@ import com.github.graschenko.service.DishService;
 import com.github.graschenko.to.DishTo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,7 +35,7 @@ public class AdminDishController {
     }
 
     @GetMapping("/by-date")
-    public List<DishTo> getAllByRestaurantAndDate(@PathVariable int restaurantId, @RequestParam LocalDate date) {
+    public List<DishTo> getAllByRestaurantAndDate(@PathVariable int restaurantId, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate date) {
         log.info("get All dishes for restaurant {} by date {}", restaurantId, date);
         return dishService.getAllByRestaurantAndDate(restaurantId, date);
     }

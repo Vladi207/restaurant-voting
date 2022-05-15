@@ -28,7 +28,6 @@ public class DishTestData {
     public static final Dish king_menu1_dish2 = new Dish(DISH1_ID + 9, "French fries", 130, LocalDate.now().minusDays(1));
     public static final Dish king_menu1_dish3 = new Dish(DISH1_ID + 10, "Mayo", 30, LocalDate.now().minusDays(1));
     public static final Dish king_menu1_dish4 = new Dish(DISH1_ID + 11, "Ice cream", 80, LocalDate.now().minusDays(1));
-
     public static final Dish kfc_menu2_dish1 = new Dish(DISH1_ID + 12, "Hamburger", 130, LocalDate.now());
     public static final Dish kfc_menu2_dish2 = new Dish(DISH1_ID + 13, "Hot-dog", 110, LocalDate.now());
     public static final Dish kfc_menu2_dish3 = new Dish(DISH1_ID + 14, "Mayonnaise", 30, LocalDate.now());
@@ -48,4 +47,12 @@ public class DishTestData {
     public static final List<Dish> kfc_menu2_dishes = List.of(kfc_menu2_dish1, kfc_menu2_dish2, kfc_menu2_dish4, kfc_menu2_dish3);
     public static final List<Dish> mc_menu2_dishes = List.of(mc_menu2_dish1, mc_menu2_dish3, mc_menu2_dish2, mc_menu2_dish4);
     public static final List<Dish> king_menu2_dishes = List.of(king_menu2_dish1, king_menu2_dish4, king_menu2_dish2, king_menu2_dish3);
+
+    public static Dish getNew() {
+        return new Dish(null, "New Dish", 100, LocalDate.now());
+    }
+
+    public static Dish getUpdated() {
+        return new Dish(DISH1_ID + 12, "Updated Dish", 200, LocalDate.now());
+    }
 }
