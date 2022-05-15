@@ -20,6 +20,7 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.date=:date")
     Optional<Vote> getByDate(@Param("userId") int userId, @Param("date") LocalDate date);
 
+    @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT v FROM Vote v WHERE v.user.id=:userId ORDER BY v.date DESC")
     List<Vote> getAll(@Param("userId") int userId);
 }
